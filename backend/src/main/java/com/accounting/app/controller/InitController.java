@@ -63,7 +63,7 @@ public class InitController {
 
             // 2. テストユーザーを作成
             User user = createUser(company);
-            result.put("user", user.getUsername());
+            result.put("user", user.getEmail());
 
             // 3. 会計期間を作成
             FiscalPeriod fiscalPeriod = createFiscalPeriod(company);
@@ -112,34 +112,26 @@ public class InitController {
 
         Company company = new Company();
         company.setName("テスト株式会社");
-        company.setCode("TEST001");
-        company.setRepresentativeName("代表太郎");
         company.setPostalCode("100-0001");
         company.setAddress("東京都千代田区千代田1-1");
-        company.setPhoneNumber("03-1234-5678");
+        company.setPhone("03-1234-5678");
         company.setEmail("info@test-company.co.jp");
-        company.setFiscalYearEndMonth(12);
-        company.setCreatedAt(LocalDateTime.now());
-        company.setUpdatedAt(LocalDateTime.now());
+        company.setTaxId("1234567890123");
 
         return companyRepository.save(company);
     }
 
     private User createUser(Company company) {
         // 既に存在する場合はスキップ
-        if (userRepository.findByUsername("admin").isPresent()) {
-            return userRepository.findByUsername("admin").get();
+        if (userRepository.findByEmail("admin@test.com").isPresent()) {
+            return userRepository.findByEmail("admin@test.com").get();
         }
 
         User user = new User();
-        user.setUsername("admin");
         user.setEmail("admin@test.com");
         // 注: 実際の本番環境ではパスワードハッシュ化が必要
         user.setPasswordHash("password123");
-        user.setDisplayName("管理者");
-        user.setIsActive(true);
-        user.setCreatedAt(LocalDateTime.now());
-        user.setUpdatedAt(LocalDateTime.now());
+        user.setName("管理者");
 
         user = userRepository.save(user);
 
@@ -147,9 +139,7 @@ public class InitController {
         UserCompanyRole role = new UserCompanyRole();
         role.setUser(user);
         role.setCompany(company);
-        role.setRole(UserCompanyRole.Role.ADMIN);
-        role.setCreatedAt(LocalDateTime.now());
-        role.setUpdatedAt(LocalDateTime.now());
+        role.setRole(UserCompanyRole.RoleType.ADMIN);
         userCompanyRoleRepository.save(role);
 
         return user;

@@ -33,6 +33,7 @@ jobs:
 
       - name: Generate test report
         if: always()
+        continue-on-error: true
         uses: dorny/test-reporter@v1
         with:
           name: Backend Test Results

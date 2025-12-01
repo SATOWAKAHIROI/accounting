@@ -1,0 +1,122 @@
+# ============================
+# Java / Maven
+# ============================
+backend/target/
+backend/*.jar
+backend/*.war
+backend/*.ear
+backend/*.class
+backend/.mvn/
+backend/mvnw
+backend/mvnw.cmd
+
+# ============================
+# Node.js / npm
+# ============================
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.vite/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+
+# ============================
+# 環境変数ファイル
+# ============================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+backend/src/main/resources/application-local.yml
+backend/src/main/resources/application-prod.yml
+
+# ============================
+# IDE
+# ============================
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# NetBeans
+nbproject/
+nbbuild/
+dist/
+nbdist/
+
+# ============================
+# OS
+# ============================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# ============================
+# Docker
+# ============================
+*.log
+.docker/
+
+# ============================
+# データベース
+# ============================
+*.db
+*.sqlite
+*.sqlite3
+
+# ============================
+# 一時ファイル / キャッシュ
+# ============================
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# ============================
+# テスト / カバレッジ
+# ============================
+coverage/
+*.lcov
+.nyc_output/
+
+# ============================
+# ビルド成果物
+# ============================
+*.gz
+*.zip
+*.tar
+
+# ============================
+# セキュリティ関連
+# ============================
+*.key
+*.pem
+*.crt
+*.p12
+credentials.json
+secrets.yml

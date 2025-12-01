@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: accounting-app-backend
+
+  # データベース設定
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:accounting_db}?useSSL=false&serverTimezone=Asia/Tokyo&allowPublicKeyRetrieval=true
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # JPA設定
+  jpa:
+    hibernate:
+      ddl-auto: update  # 開発環境用。本番環境ではvalidateまたはnone推奨
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  # OAuth2設定（プレースホルダー）
+  # TODO: 本番環境では以下のOAuth2設定を有効化すること
+  # security:
+  #   oauth2:
+  #     resourceserver:
+  #       jwt:
+  #         # OAuth2プロバイダーのJWK Set URI（後で設定）
+  #         jwk-set-uri: ${OAUTH2_JWK_SET_URI:}
+  #         # 発行者URI（後で設定）
+  #         issuer-uri: ${OAUTH2_ISSUER_URI:}
+
+# サーバー設定
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /api
+
+# ログ設定
+logging:
+  level:
+    com.accounting.app: DEBUG
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+# アプリケーション固有設定
+app:
+  # CORS設定
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000}
+
+  # PDF生成設定
+  pdf:
+    temp-dir: ${PDF_TEMP_DIR:/tmp/accounting-pdf}
+
+  # Excel生成設定
+  excel:
+    temp-dir: ${EXCEL_TEMP_DIR:/tmp/accounting-excel}

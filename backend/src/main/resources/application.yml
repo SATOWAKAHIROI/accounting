@@ -4,11 +4,12 @@ spring:
 
   # データベース設定
   datasource:
-    # Heroku環境ではDATABASE_URL、ローカルではMySQL接続文字列を使用
-    url: ${DATABASE_URL:jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:accounting_db}?useSSL=false&serverTimezone=Asia/Tokyo&allowPublicKeyRetrieval=true}
-    username: ${DB_USER:root}
-    password: ${DB_PASSWORD:password}
-    driver-class-name: ${DB_DRIVER:com.mysql.cj.jdbc.Driver}
+    # JDBC_DATABASE_URLが設定されている場合はそれを使用（Heroku環境）
+    # それ以外はローカルMySQL設定を使用
+    url: ${JDBC_DATABASE_URL:jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:accounting_db}?useSSL=false&serverTimezone=Asia/Tokyo&allowPublicKeyRetrieval=true}
+    username: ${JDBC_DATABASE_USERNAME:${DB_USER:root}}
+    password: ${JDBC_DATABASE_PASSWORD:${DB_PASSWORD:password}}
+    driver-class-name: ${JDBC_DATABASE_DRIVER:${DB_DRIVER:com.mysql.cj.jdbc.Driver}}
 
   # JPA設定
   jpa:

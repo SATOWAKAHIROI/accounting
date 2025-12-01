@@ -1,10 +1,7 @@
-# Build stage
-FROM node:18-alpine AS build
+# Build stage (Debian-based for better compatibility with native modules)
+FROM node:18-slim AS build
 
 WORKDIR /app
-
-# ビルドツールをインストール
-RUN apk add --no-cache python3 make g++
 
 # package.jsonとpackage-lock.jsonをコピーして依存関係をインストール
 COPY package*.json ./

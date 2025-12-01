@@ -26,4 +26,4 @@ ENV JAVA_OPTS=""
 EXPOSE 8080
 
 # アプリケーション起動
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
+CMD java -Dserver.port=$PORT $JAVA_OPTS -jar app.jar

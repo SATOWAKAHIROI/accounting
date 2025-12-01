@@ -61,6 +61,13 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- PostgreSQL Connector (Heroku用) -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- Apache PDFBox (PDF生成) -->
         <dependency>
             <groupId>org.apache.pdfbox</groupId>

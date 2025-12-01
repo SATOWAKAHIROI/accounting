@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(docker-compose up:*)",
+      "Bash(docker-compose ps:*)",
+      "Bash(docker-compose logs:*)",
+      "Bash(docker-compose down:*)",
+      "Bash(docker-compose restart:*)",
+      "Bash(./mvnw clean compile:*)",
+      "Bash(mvn clean:*)",
+      "Bash(java:*)",
+      "Bash(wc:*)",
+      "Bash(done)",
+      "Bash(ls:*)",
+      "Bash(if [ -d \"/mnt/c/Users/hito1/OneDrive/デスクトップ/programs/Spring/frontend\" ])",
+      "Bash(then)",
+      "Bash(else)",
+      "Bash(fi)",
+      "Bash(cd /mnt/c/Users/hito1/OneDrive/デスクトップ/programs/Spring/frontend/src find pages -name \"*.jsx\" -type f)",
+      "Bash(curl:*)",
+      "Bash(python3:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

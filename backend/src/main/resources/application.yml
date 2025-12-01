@@ -4,20 +4,21 @@ spring:
 
   # データベース設定
   datasource:
-    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:accounting_db}?useSSL=false&serverTimezone=Asia/Tokyo&allowPublicKeyRetrieval=true
+    # Heroku環境ではDATABASE_URL、ローカルではMySQL接続文字列を使用
+    url: ${DATABASE_URL:jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:accounting_db}?useSSL=false&serverTimezone=Asia/Tokyo&allowPublicKeyRetrieval=true}
     username: ${DB_USER:root}
     password: ${DB_PASSWORD:password}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: ${DB_DRIVER:com.mysql.cj.jdbc.Driver}
 
   # JPA設定
   jpa:
     hibernate:
-      ddl-auto: update  # 開発環境用。本番環境ではvalidateまたはnone推奨
-    show-sql: true
+      ddl-auto: ${JPA_DDL_AUTO:update}  # 開発環境用。本番環境ではvalidateまたはnone推奨
+    show-sql: ${JPA_SHOW_SQL:true}
     properties:
       hibernate:
         format_sql: true
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: ${HIBERNATE_DIALECT:org.hibernate.dialect.MySQL8Dialect}
 
   # OAuth2設定（プレースホルダー）
   # TODO: 本番環境では以下のOAuth2設定を有効化すること

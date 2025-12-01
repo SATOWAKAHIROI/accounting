@@ -3,6 +3,9 @@ FROM node:18-alpine AS build
 
 WORKDIR /app
 
+# ビルドツールをインストール
+RUN apk add --no-cache python3 make g++
+
 # package.jsonとpackage-lock.jsonをコピーして依存関係をインストール
 COPY package*.json ./
 RUN npm ci

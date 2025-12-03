@@ -4,9 +4,12 @@ import com.accounting.app.dto.common.ApiResponse;
 import com.accounting.app.dto.request.AccountRequest;
 import com.accounting.app.dto.response.AccountResponse;
 import com.accounting.app.entity.Account;
+import com.accounting.app.security.JwtTokenProvider.UserPrincipal;
 import com.accounting.app.service.AccountService;
+import com.accounting.app.service.CompanyAccessService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,9 +23,12 @@ import java.util.List;
 public class AccountController {
 
     private final AccountService accountService;
+    private final CompanyAccessService companyAccessService;
 
-    public AccountController(AccountService accountService) {
+    public AccountController(AccountService accountService,
+                            CompanyAccessService companyAccessService) {
         this.accountService = accountService;
+        this.companyAccessService = companyAccessService;
     }
 
     /**
@@ -31,7 +37,11 @@ public class AccountController {
     @GetMapping
     public ResponseEntity<ApiResponse<List<AccountResponse>>> findAll(
             @PathVariable Long companyId,
-            @RequestParam(required = false) String accountType) {
+            @RequestParam(required = false) String accountType,
+            @AuthenticationPrincipal UserPrincipal currentUser) {
+
+        // アクセス権限チェック
+        companyAccessService.validateAccess(currentUser.getUserId(), companyId);
 
         List<AccountResponse> accounts;
         if (accountType != null && !accountType.isEmpty()) {
@@ -50,7 +60,11 @@ public class AccountController {
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<AccountResponse>> findById(
             @PathVariable Long companyId,
-            @PathVariable Long id) {
+            @PathVariable Long id,
+            @AuthenticationPrincipal UserPrincipal currentUser) {
+
+        // アクセス権限チェック
+        companyAccessService.validateAccess(currentUser.getUserId(), companyId);
 
         AccountResponse account = accountService.findById(id);
         return ResponseEntity.ok(ApiResponse.success(account));
@@ -62,7 +76,11 @@ public class AccountController {
     @PostMapping
     public ResponseEntity<ApiResponse<AccountResponse>> create(
             @PathVariable Long companyId,
-            @Valid @RequestBody AccountRequest request) {
+            @Valid @RequestBody AccountRequest request,
+            @AuthenticationPrincipal UserPrincipal currentUser) {
+
+        // アクセス権限チェック
+        companyAccessService.validateAccess(currentUser.getUserId(), companyId);
 
         AccountResponse account = accountService.create(companyId, request);
         return ResponseEntity
@@ -77,7 +95,11 @@ public class AccountController {
     public ResponseEntity<ApiResponse<AccountResponse>> update(
             @PathVariable Long companyId,
             @PathVariable Long id,
-            @Valid @RequestBody AccountRequest request) {
+            @Valid @RequestBody AccountRequest request,
+            @AuthenticationPrincipal UserPrincipal currentUser) {
+
+        // アクセス権限チェック
+        companyAccessService.validateAccess(currentUser.getUserId(), companyId);
 
         AccountResponse account = accountService.update(id, request);
         return ResponseEntity.ok(ApiResponse.success(account));
@@ -89,7 +111,11 @@ public class AccountController {
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> delete(
             @PathVariable Long companyId,
-            @PathVariable Long id) {
+            @PathVariable Long id,
+            @AuthenticationPrincipal UserPrincipal currentUser) {
+
+        // アクセス権限チェック
+        companyAccessService.validateAccess(currentUser.getUserId(), companyId);
 
         accountService.delete(id);
         return ResponseEntity

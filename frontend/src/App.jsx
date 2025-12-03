@@ -1,37 +1,42 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './contexts/AuthContext';
-import ProtectedRoute from './components/common/ProtectedRoute';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
+import ProtectedRoute from "./components/common/ProtectedRoute";
 
 // Auth pages
-import Login from './pages/auth/Login';
-import Register from './pages/auth/Register';
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
 
 // Dashboard
-import Dashboard from './pages/Dashboard';
+import Dashboard from "./pages/Dashboard";
 
 // Master pages
-import AccountList from './pages/master/AccountList';
-import SubAccountList from './pages/master/SubAccountList';
-import TaxTypeList from './pages/master/TaxTypeList';
-import PartnerList from './pages/master/PartnerList';
-import ItemList from './pages/master/ItemList';
+import AccountList from "./pages/master/AccountList";
+import SubAccountList from "./pages/master/SubAccountList";
+import TaxTypeList from "./pages/master/TaxTypeList";
+import PartnerList from "./pages/master/PartnerList";
+import ItemList from "./pages/master/ItemList";
 
 // Transaction pages
-import JournalList from './pages/transaction/JournalList';
-import InvoiceList from './pages/transaction/InvoiceList';
-import PaymentList from './pages/transaction/PaymentList';
+import JournalList from "./pages/transaction/JournalList";
+import InvoiceList from "./pages/transaction/InvoiceList";
+import PaymentList from "./pages/transaction/PaymentList";
 
 // Report pages
-import GeneralLedger from './pages/report/GeneralLedger';
-import TrialBalance from './pages/report/TrialBalance';
-import ProfitLoss from './pages/report/ProfitLoss';
-import BalanceSheet from './pages/report/BalanceSheet';
+import GeneralLedger from "./pages/report/GeneralLedger";
+import TrialBalance from "./pages/report/TrialBalance";
+import ProfitLoss from "./pages/report/ProfitLoss";
+import BalanceSheet from "./pages/report/BalanceSheet";
 
 // Settings pages
-import FiscalPeriodList from './pages/settings/FiscalPeriodList';
-import CompanySettings from './pages/settings/CompanySettings';
-import UserList from './pages/settings/UserList';
+import FiscalPeriodList from "./pages/settings/FiscalPeriodList";
+import CompanySettings from "./pages/settings/CompanySettings";
+import UserList from "./pages/settings/UserList";
 
 function App() {
   return (

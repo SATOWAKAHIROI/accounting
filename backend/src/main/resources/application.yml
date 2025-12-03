@@ -59,3 +59,11 @@ app:
   # Excel生成設定
   excel:
     temp-dir: ${EXCEL_TEMP_DIR:/tmp/accounting-excel}
+
+# JWT設定
+jwt:
+  # JWT署名用の秘密鍵（本番環境では環境変数から設定すること）
+  # 注意: この値は最低512ビット（64文字）必要
+  secret: ${JWT_SECRET:accounting-app-jwt-secret-key-for-development-environment-minimum-512-bits-required-please-change-in-production}
+  # トークン有効期限（ミリ秒） デフォルト: 24時間
+  expiration: ${JWT_EXPIRATION:86400000}

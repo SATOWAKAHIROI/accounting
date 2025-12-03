@@ -12,6 +12,7 @@ import com.accounting.app.exception.ResourceNotFoundException;
 import com.accounting.app.repository.CompanyRepository;
 import com.accounting.app.repository.UserCompanyRoleRepository;
 import com.accounting.app.repository.UserRepository;
+import com.accounting.app.security.JwtTokenProvider;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,16 +34,19 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserCompanyRoleRepository userCompanyRoleRepository;
     private final CompanyRepository companyRepository;
+    private final JwtTokenProvider jwtTokenProvider;
     // TODO: PasswordEncoderを追加
     // private final PasswordEncoder passwordEncoder;
 
     public UserService(
             UserRepository userRepository,
             UserCompanyRoleRepository userCompanyRoleRepository,
-            CompanyRepository companyRepository) {
+            CompanyRepository companyRepository,
+            JwtTokenProvider jwtTokenProvider) {
         this.userRepository = userRepository;
         this.userCompanyRoleRepository = userCompanyRoleRepository;
         this.companyRepository = companyRepository;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     /**
@@ -158,8 +162,8 @@ public class UserService {
             throw new BadRequestException("メールアドレスまたはパスワードが正しくありません");
         }
 
-        // TODO: JWTトークンの生成を実装
-        String token = "dummy-jwt-token"; // 仮のトークン
+        // JWTトークンの生成
+        String token = jwtTokenProvider.generateToken(user.getId(), user.getEmail());
 
         return new AuthResponse(token, UserResponse.from(user));
     }

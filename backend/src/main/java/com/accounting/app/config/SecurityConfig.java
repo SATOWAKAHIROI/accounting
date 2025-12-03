@@ -53,7 +53,7 @@ public class SecurityConfig {
             // エンドポイント別の認証設定
             .authorizeHttpRequests(authorize -> authorize
                 // 認証不要エンドポイント（ログイン、登録など）
-                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/auth/**", "/api/users/login", "/api/users/register", "/init/**").permitAll()
 
                 // その他の全エンドポイントは認証必須
                 .anyRequest().authenticated()
